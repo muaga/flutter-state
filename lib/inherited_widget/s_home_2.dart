@@ -66,7 +66,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
         /// 새로운 object를 추가 ---> 깊은 복사
         /// [1, 2, 3] + 4
         /// 스프레드 연산자
-        catalogList = [...catalogList];
+        catalogList = [...catalogList, catalog];
       }
 
       // 얕은 복사 개념으로 돌아감

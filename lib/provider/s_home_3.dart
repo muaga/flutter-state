@@ -40,9 +40,11 @@ class _HomeScreen3State extends State<HomeScreen3> {
     setState(() {
       if (catalogList.contains(catalog)) {
         // 리스트에 object 포함 하고 있다면 삭제 처리
-        catalogList.remove(catalog);
+        catalogList.where((element) {
+          return element != catalog;
+        }).toList();
       } else {
-        catalogList.add(catalog); // add 처리
+        catalogList = [...catalogList, catalog]; // add 처리
       }
     });
   }
