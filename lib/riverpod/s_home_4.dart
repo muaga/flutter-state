@@ -1,3 +1,4 @@
+import 'package:class_statement/riverpod/state/riverpod_badge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -6,8 +7,6 @@ import '../common/w_bottom_bar.dart';
 import 'f_cart.dart';
 import 'f_catalog.dart';
 
-// 상태 관리 - StatefulWidget 활용
-// 상태가 있는 위젯 생성
 class HomeScreen4 extends StatefulWidget {
   const HomeScreen4({super.key});
 
@@ -34,6 +33,7 @@ class _HomeScreen4State extends State<HomeScreen4> {
   @override
   Widget build(BuildContext context) {
     print("HomeScreen build() 함수 호출");
+
     /// 3. 위젯 트리에 등록
     return ProviderScope(
       child: Scaffold(
@@ -48,15 +48,19 @@ class _HomeScreen4State extends State<HomeScreen4> {
             CartWidget(),
           ],
         ),
-        bottomNavigationBar: BottomBar(
-          currentIndex: currentIndex,
-          // 코드 수정 예정
-          cartTotal: '${0}',
-          onTap: (index) {
-            setState(() {
-              currentIndex = index;
-            });
-          },
+
+        /// 특정 부분만 렌더링하고 싶다면, Consumer 사용
+        bottomNavigationBar: Consumer(
+          builder: (context, ref, child) => BottomBar(
+            currentIndex: currentIndex,
+            // 코드 수정 예정
+            cartTotal: '${ref.watch(badgeProvider)}',
+            onTap: (index) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
+          ),
         ),
       ),
     );
